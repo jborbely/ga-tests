@@ -1,0 +1,67 @@
+{% set name = "msl-loadlib" %}
+{% set version = "0.9.0" %}
+{% set sha256 = "b73f803c29e56ffb7d4109dbc65e6aac95b296fbd6a0e8aa7ca5a88d4d500ef1" %}
+{% set build = 0 %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/MSLNZ/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: {{ build }}
+  error_overlinking: false
+
+requirements:
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python ==2.7|>=3.5
+
+test:
+  imports:
+    - msl
+    - msl.loadlib
+    - msl.examples.loadlib
+  requires:
+    - pip
+  commands:
+    - pip check
+
+about:
+  home: https://github.com/MSLNZ/{{ name }}
+  summary: Load a shared library (and access a 32-bit library from 64-bit Python)
+  description: |
+    This package loads a shared library in Python. It is basically just a thin
+    wrapper around [ctypes](https://docs.python.org/3/library/ctypes.html)
+    (for libraries that use the `__cdecl` or `__stdcall` calling convention), 
+    [Python for .NET](https://pythonnet.github.io/) (for libraries that use 
+    Microsoft's .NET Framework, `CLR`), [Py4J](https://www.py4j.org/) (for Java
+    `.jar` or `.class` files) and [comtypes](https://pythonhosted.org/comtypes/#)
+    (for libraries that use the 
+    [Component Object Model](https://en.wikipedia.org/wiki/Component_Object_Model)).
+    
+    However, the primary advantage is that it is possible to communicate with a 32-bit
+    library from 64-bit Python.
+    
+    MSL-LoadLib is a pure-python package, but, [Python for .NET](https://pythonnet.github.io/)
+    depends on the .NET Common Language Runtime (CLR) on Windows and Mono Runtime on
+    Linux/macOS, and [Py4J](https://www.py4j.org/) depends on having a
+    [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) installed.
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  doc_url: https://{{ name }}.readthedocs.io/
+  dev_url: https://github.com/MSLNZ/{{ name }}
+
+extra:
+  recipe-maintainers:
+    - jborbely
