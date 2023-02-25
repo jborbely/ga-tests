@@ -39,5 +39,6 @@ if loadlib.IS_WINDOWS:
     ])
 
 for path in paths:
-    if not os.path.isfile(path):
+    print(path)
+    if os.path.isfile(path):
         raise OSError('Cannot find: {!r}'.format(path))
