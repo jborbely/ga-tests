@@ -29,5 +29,9 @@ jobs:
       - name: Update PyPI and GitHub caches
         env:
           MSL_PM_GITHUB_AUTH: ${{ secrets.MSL_PM_GITHUB_AUTH }}
+          ANOTHER_VARIABLE: ${{ vars.ANOTHER_VARIABLE }}
         run: |
           python -c "import os; print(os.environ.get('MSL_PM_GITHUB_AUTH'))"
+          python -c "import os; print(os.environ.get('ANOTHER_VARIABLE'))"
+          echo "MSL_PM_GITHUB_AUTH : $MSL_PM_GITHUB_AUTH"
+          echo "ANOTHER_VARIABLE   : $ANOTHER_VARIABLE"
