@@ -30,6 +30,5 @@ jobs:
         env:
           MSL_PM_GITHUB_AUTH: ${{ secrets.MSL_PM_GITHUB_AUTH }}
         run: |
-          python show_environ.py
-          python -c "import os; print(repr(os.environ.get('MSL_PM_GITHUB_AUTH')))"
-          echo "MSL_PM_GITHUB_AUTH : $MSL_PM_GITHUB_AUTH"
+          python -m pip install msl-package-manager
+          msl list --github --update-cache
