@@ -11,13 +11,12 @@ def ipv4_addresses():
     :class:`set` of :class:`str`
         All IPv4 addresses on all network interfaces.
     """
-    if sys.platform == 'win32':
+    if sys.platform == 'linux':
+        out = subprocess.check_output(['hostname', '--all-ip-addresses'])
+        addresses = set(out.decode().split())
+    else:
         interfaces = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET)
         addresses = set(ip[-1][0] for ip in interfaces)
-    else:
-        p = subprocess.Popen(['hostname', '--all-ip-addresses'], stdout=subprocess.PIPE)
-        stdout, _ = p.communicate()
-        addresses = set(stdout.decode().split())
     addresses.discard('127.0.0.1')
     return addresses
 
