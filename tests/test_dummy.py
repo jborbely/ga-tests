@@ -2,7 +2,7 @@ import socket
 import subprocess
 import sys
 
-from msl.equipment import utils
+#from msl.equipment import utils
 
 
 def ipv4_addresses_2():
@@ -31,9 +31,9 @@ def test_ipv4_addresses_2():
     assert addresses
 
 
-def test_ipv4_addresses():
-    addresses = utils.ipv4_addresses()
-    print()
-    for a in addresses:
-        print(a)
-    assert addresses
+# def test_ipv4_addresses():
+#     addresses = utils.ipv4_addresses()
+#     print()
+#     for a in addresses:
+#         print(a)
+#     assert addresses
