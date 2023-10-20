@@ -41,9 +41,10 @@ jobs:
           echo "HOST=$HOST"
           # echo 127.0.0.1 $HOSTNAME >> /etc/hosts
       - name: Run ifconfig
-        if: ${{ matrix.os != 'windows' }}
+        if: ${{ matrix.os == 'macos' }}
         run: |
-          ifconfig
+          # ifconfig
           ifconfig | grep "inet "
+          ipconfig getifaddr
       - name: Run tests
         run: python -m pytest -sv
