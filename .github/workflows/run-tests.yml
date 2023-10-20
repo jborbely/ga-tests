@@ -30,7 +30,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools wheel
-          # python -m pip install git+https://github.com/MSLNZ/msl-equipment.git@main
+          python -m pip install git+https://github.com/MSLNZ/msl-equipment.git@main
       - name: Install package
         run: python -m pip install --upgrade --prefer-binary --editable .[tests]
       - name: Echo localhost
@@ -38,6 +38,7 @@ jobs:
         run: |
           cat /etc/hosts
           echo $HOSTNAME
+          echo $HOST
           # echo 127.0.0.1 $HOSTNAME >> /etc/hosts
       - name: Run tests
         run: python -m pytest -sv

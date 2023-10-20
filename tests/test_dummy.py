@@ -16,6 +16,9 @@ def ipv4_addresses_2():
     if sys.platform == 'linux':
         out = subprocess.check_output(['hostname', '--all-ip-addresses'])
         addresses = set(out.decode().split())
+    if sys.platform == 'darwin':
+        interfaces = socket.getaddrinfo(socket.gethostbyname(''), None, socket.AF_INET)
+        addresses = set(ip[-1][0] for ip in interfaces)
     else:
         interfaces = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET)
         addresses = set(ip[-1][0] for ip in interfaces)
