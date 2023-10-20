@@ -1,13 +1,8 @@
 from setuptools import setup
 
-install_requires = [
-    'numpy>=1.13.0',
-    'scipy',
-]
-tests_require = [
-    'pytest',
-    'pytest-cov',
-]
+install_requires = []
+
+tests_require = ['pytest', 'pytest-cov']
 
 setup(
     name='ga_tests',
