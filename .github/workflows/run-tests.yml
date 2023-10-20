@@ -44,5 +44,6 @@ jobs:
         if: ${{ matrix.os != 'windows' }}
         run: |
           ifconfig
+          ip address show up
       - name: Run tests
         run: python -m pytest -sv
