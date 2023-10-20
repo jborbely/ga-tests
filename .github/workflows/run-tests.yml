@@ -37,8 +37,8 @@ jobs:
         if: ${{ matrix.os == 'macos' }}
         run: |
           cat /etc/hosts
-          echo $HOSTNAME
-          echo $HOST
+          echo "HOSTNAME=$HOSTNAME"
+          echo "HOST=$HOST"
           # echo 127.0.0.1 $HOSTNAME >> /etc/hosts
       - name: Run tests
         run: python -m pytest -sv
