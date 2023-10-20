@@ -20,7 +20,7 @@ def ipv4_addresses_2():
         ps = subprocess.Popen('ifconfig', stdout=subprocess.PIPE)
         output = subprocess.check_output(('grep', 'inet '), stdin=ps.stdout)
         ps.wait()
-        addresses = set(output.decode().splitlines())
+        addresses = set(line.split()[1] for line in output.decode().splitlines())
     else:
         interfaces = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET)
         addresses = set(ip[-1][0] for ip in interfaces)
