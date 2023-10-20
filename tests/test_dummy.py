@@ -11,19 +11,20 @@ def ipv4_addresses():
     :class:`set` of :class:`str`
         All IPv4 addresses on all network interfaces.
     """
-    if sys.platform.startswith('linux'):
+    if sys.platform == 'win32':
+        interfaces = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET)
+        addresses = set(ip[-1][0] for ip in interfaces)
+    else:
         p = subprocess.Popen(['hostname', '--all-ip-addresses'], stdout=subprocess.PIPE)
         stdout, _ = p.communicate()
         addresses = set(stdout.decode().split())
-    else:
-        interfaces = socket.getaddrinfo(socket.gethostname(), None, socket.AF_INET)
-        addresses = set(ip[-1][0] for ip in interfaces)
     addresses.discard('127.0.0.1')
     return addresses
 
 
 def test_ipv4_addresses():
     addresses = ipv4_addresses()
+    print()
     for a in addresses:
         print(a)
     assert addresses
