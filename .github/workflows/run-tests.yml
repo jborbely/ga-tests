@@ -44,6 +44,6 @@ jobs:
         if: ${{ matrix.os != 'windows' }}
         run: |
           ifconfig
-          ip address show up
+          ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2
       - name: Run tests
         run: python -m pytest -sv
