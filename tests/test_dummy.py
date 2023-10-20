@@ -2,8 +2,10 @@ import socket
 import subprocess
 import sys
 
+from msl.equipment import utils
 
-def ipv4_addresses():
+
+def ipv4_addresses_2():
     """Get the IPv4 addresses of the computer.
 
     Returns
@@ -21,8 +23,16 @@ def ipv4_addresses():
     return addresses
 
 
+def test_ipv4_addresses_2():
+    addresses = ipv4_addresses_2()
+    print()
+    for a in addresses:
+        print(a)
+    assert addresses
+
+
 def test_ipv4_addresses():
-    addresses = ipv4_addresses()
+    addresses = utils.ipv4_addresses()
     print()
     for a in addresses:
         print(a)
