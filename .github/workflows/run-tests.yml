@@ -33,5 +33,10 @@ jobs:
           # python -m pip install git+https://github.com/MSLNZ/msl-equipment.git@main
       - name: Install package
         run: python -m pip install --upgrade --prefer-binary --editable .[tests]
+      - name: Echo localhost
+        if: ${{ matrix.os == 'macos' }}
+        run: |
+          echo 127.0.0.1 $HOSTNAME >> /etc/hosts
+          echo $HOSTNAME
       - name: Run tests
         run: python -m pytest -sv
