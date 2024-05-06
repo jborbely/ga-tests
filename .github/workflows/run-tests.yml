@@ -25,7 +25,7 @@ jobs:
       - name: Compile
         run: |
           g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libarm64.dylib
-          gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -static -shared -o fortran_libarm64.dylib
+          gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libarm64.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
