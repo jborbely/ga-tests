@@ -24,9 +24,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Compile
         run: |
-          conda install -c conda-forge gfortran
           g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.dylib
-          gfortran -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libaarch64.dylib
+          gfortran-11 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libaarch64.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
