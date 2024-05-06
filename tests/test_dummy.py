@@ -1,4 +1,4 @@
-import os
-os.environ['PYTHONNET_RUNTIME'] = "coreclr"
+from pythonnet import load
+load("coreclr")
 
 import clr
