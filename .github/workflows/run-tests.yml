@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Compile
         run: |
-          g++ cpp_lib.cpp -fPIC -static -Bstatic -Wall -o cpp_libaarch64.dylib
+          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.dylib
           gfortran-11 -fno-underscoring -fPIC fortran_lib.f90 -static -o fortran_libaarch64.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
