@@ -22,11 +22,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Compile
+      - name: Compile C++
         run: |
           g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libarm64.dylib
+      - name: Compile FORTRAN
+        run: |
           gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libarm64.dylib
-          dotnet publish dotnet_lib.cs --arch osx-arm64
+      - name: Compile C#
+        run: |
+          csc dotnet_lib.cs
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
