@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cpp_aarch64.dylib
+          path: cpp_aarch64.dylib
 
 #      - name: Set up Python ${{ matrix.python-version }}
 #        uses: actions/setup-python@v4
