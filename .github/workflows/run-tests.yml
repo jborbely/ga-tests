@@ -23,16 +23,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           # architecture: ${{ matrix.architecture }}
-      - name: Run
-        run: python -c "import platform; print(platform.machine(), platform.system())"
-#      - name: Install pip, setuptools and wheel
-#        run: |
-#          python -m pip install --upgrade pip
-#          python -m pip install --upgrade setuptools wheel
+      - name: Install pip, setuptools and wheel
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade setuptools wheel
+          python -m pip install --upgrade pythonnet
 #          python -m pip install git+https://github.com/MSLNZ/msl-equipment.git@main
 #      - name: Install package
 #        run: python -m pip install --upgrade --prefer-binary --editable .[tests]
@@ -47,5 +46,5 @@ jobs:
 #        if: ${{ matrix.os != 'windows' }}
 #        run: |
 #          ifconfig | grep "inet "
-#      - name: Run tests
-#        run: python -m pytest -sv
+      - name: Run tests
+        run: python -m pytest -sv
