@@ -15,32 +15,34 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest]
-        # python-version: ["3.9", "3.10", "3.11", "3.12"]
         # os: [windows, ubuntu, macos]
-        # architecture: [x64]
+        python-version: ["3.12"]
+        architecture: [x64]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Compile C++
-        run: |
-          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libarm64.dylib
-      - name: Compile FORTRAN
-        run: |
-          gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libarm64.dylib
-      - name: Compile C#
-        run: |
-          csc dotnet_lib.cs
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: "*.dylib"
-
-#      - name: Set up Python ${{ matrix.python-version }}
-#        uses: actions/setup-python@v4
+#      - name: Compile C++
+#        run: |
+#          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libarm64.dylib
+#      - name: Compile FORTRAN
+#        run: |
+#          gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libarm64.dylib
+#      - name: Compile C#
+#        run: |
+#          csc dotnet_lib.cs
+#      - name: Upload artifacts
+#        uses: actions/upload-artifact@v4
 #        with:
-#          python-version: ${{ matrix.python-version }}
-#          architecture: ${{ matrix.architecture }}
+#          path: "*.dylib"
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          # architecture: ${{ matrix.architecture }}
+      - name: Run
+        run: python -c "import platform; print(platform.machine())"
 #      - name: Install pip, setuptools and wheel
 #        run: |
 #          python -m pip install --upgrade pip
