@@ -23,11 +23,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Compile
-        run: g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_aarch64.dylib
-      - name: Upload artifact
+        run: |
+          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.dylib
+          gfortran -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libaarch64.dylib
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: cpp_aarch64.dylib
+          path: "*.dylib"
 
 #      - name: Set up Python ${{ matrix.python-version }}
 #        uses: actions/setup-python@v4
