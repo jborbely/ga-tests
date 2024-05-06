@@ -42,7 +42,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           # architecture: ${{ matrix.architecture }}
       - name: Run
-        run: python -c "import platform; print(platform.machine())"
+        run: python -c "import platform; print(platform.machine(), platform.system())"
 #      - name: Install pip, setuptools and wheel
 #        run: |
 #          python -m pip install --upgrade pip
