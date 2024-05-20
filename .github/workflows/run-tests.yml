@@ -20,8 +20,8 @@ jobs:
         # architecture: [x64]
 
     steps:
-      - name: Install gcc@7
-        run: brew install gcc@7
+      - name: Install gcc@11
+        run: brew install gcc@11
       - name: List directory
         run: ls /opt/homebrew/opt/gcc/lib/gcc/current/*gfortran*
 
