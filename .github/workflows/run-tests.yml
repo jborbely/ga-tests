@@ -20,10 +20,8 @@ jobs:
         # architecture: [x64]
 
     steps:
-      - name: Install gcc@11
-        run: brew install gcc@11
       - name: List directory
-        run: ls /opt/homebrew/opt/gcc/lib/gcc/current/*gfortran*
+        run: ls /opt/homebrew/opt/gcc/lib/gcc/current/libgfortran*
 
 #      - name: Checkout repository
 #        uses: actions/checkout@v4
