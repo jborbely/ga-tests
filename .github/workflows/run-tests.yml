@@ -21,7 +21,9 @@ jobs:
 
     steps:
       - name: Locate libgfortran.5
-        run: locate libgfortran.5.dylib
+        run: |
+          sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+          locate libgfortran.5.dylib
       - name: Install gcc@5
         run: brew install gcc@5
 #      - name: Checkout repository
