@@ -20,8 +20,8 @@ jobs:
         # architecture: [x64]
 
     steps:
-      - name: List directory
-        run: ls /usr/local/lib/libgfortran*
+      - name: Commands
+        run: which gfortran
 
 #      - name: Checkout repository
 #        uses: actions/checkout@v4
