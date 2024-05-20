@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: List directory
-        run: ls /opt/homebrew/opt/gcc/lib/gcc/current/libgfortran*
+        run: ls /usr/local/lib/libgfortran*
 
 #      - name: Checkout repository
 #        uses: actions/checkout@v4
