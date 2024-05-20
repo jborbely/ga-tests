@@ -25,7 +25,7 @@ jobs:
       - name: Compile fortran example
         run: |
           gfortran-13 -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libarm64.dylib
-          ldd fortran_libarm64.dylib
+          otool -L fortran_libarm64.dylib
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
