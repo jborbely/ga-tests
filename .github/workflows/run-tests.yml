@@ -20,10 +20,6 @@ jobs:
         # architecture: [x64]
 
     steps:
-      - name: Locate libgfortran.5
-        run: |
-          sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
-          locate libgfortran.5.dylib
       - name: Install gcc@5
         run: brew install gcc@5
 #      - name: Checkout repository
