@@ -50,7 +50,7 @@ jobs:
       - name: Install numpy and scipy wheels (from index)
         run: |
           echo ${{ matrix.architecture }}
-          python -m pip install --prefer-binary --index-url https://github.com/cgohlke/numpy-mkl-wheels/releases/tag/v2024.1.3 --extra-index-url https://pypi.org/simple
+          python -m pip install --prefer-binary --index-url https://github.com/cgohlke/numpy-mkl-wheels/releases/tag/v2024.1.3 --extra-index-url https://pypi.org/simple numpy scipy
 
 #          python -m pip install --upgrade setuptools wheel
 #          python -m pip install --upgrade pythonnet pytest
