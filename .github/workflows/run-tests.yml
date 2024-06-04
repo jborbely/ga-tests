@@ -18,7 +18,9 @@ jobs:
         os: [windows, ubuntu, macos]
         architecture: [x64, x86]
         exclude:
-          - os: [ubuntu, macos]
+          - os: ubuntu
+            architecture: x86
+          - os: macos
             architecture: x86
 
     steps:
