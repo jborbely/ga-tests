@@ -26,4 +26,4 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Print platform
-        run: python -c "import platform; print(platform.system()+'-'+platform.machine())"
+        run: python -c "import platform; print(platform.system(), platform.machine(), platform.architecture())"
