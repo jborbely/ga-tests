@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [macos-13, macos-14, windows-latest, ubuntu-latest]
 
     steps:
@@ -25,5 +25,5 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Print sysconfig
-        run: python -c "import sysconfig; print(sysconfig.get_platform())"
+      - name: Print platform
+        run: python -c "import platform; print(platform.system()+'-'+platform.machine())"
