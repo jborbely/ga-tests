@@ -35,6 +35,7 @@ jobs:
         run: |
           cd msl-nlf
           pip install .[tests]
+          sudo apt-get install fpc
       - name: Compile Roszman1
         run: |
           g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so
