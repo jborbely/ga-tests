@@ -46,5 +46,6 @@ jobs:
         run: |
           pytest tests -v
           rm msl-nlf/tests/user_defined/Roszman1_x64.so
+          cp Roszman1_x64.so msl-nlf/tests/user_defined/Roszman1_x64.so
           cd msl-nlf
           pytest tests/test_nist.py::test_Roszman1
