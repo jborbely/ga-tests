@@ -39,4 +39,6 @@ jobs:
         run: |
           g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so
       - name: Run tests
-        run: pytest tests/test_dummy.py
+        run: |
+          ls -la
+          python -m pytest tests
