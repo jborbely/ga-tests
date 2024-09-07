@@ -40,7 +40,6 @@ jobs:
           g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so
       - name: Run tests
         run: |
-          ls -la
-          python -m pytest tests -v
-          cd msl-nlf/tests
-          python -m pytest test_nist.py::test_Roszman1
+          pytest tests -v
+          cd msl-nlf
+          pytest /tests/test_nist.py::test_Roszman1
