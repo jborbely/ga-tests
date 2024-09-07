@@ -25,4 +25,4 @@ def test_roszman1():
     a = (c_double * 4)(a1, a2, a3, a4)
     y = c_double()
     lib.GetFunctionValue(byref(x_c), byref(a), byref(y))
-    assert y.value == a1-a2*x-math.arctan(a3/(x-a4))/math.pi
+    assert y.value == a1-a2*x-math.atan(a3/(x-a4))/math.pi
