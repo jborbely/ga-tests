@@ -32,6 +32,10 @@ jobs:
           ldd msl-nlf/tests/user_defined/Nelson_x64.so
           ldd msl-nlf/tests/user_defined/Roszman1_x64.so
       - name: Install package
-        run: pip install .[tests]
+        run: |
+          cd msl-nlf
+          pip install .[tests]
       - name: Run tests
-        run: pytest
+        run: |
+          cd msl-nlf
+          pytest
