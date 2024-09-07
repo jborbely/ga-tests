@@ -4,9 +4,9 @@ from ctypes import *
 
 import pytest
 
-def test_roszman1():
-
-    lib = CDLL('./Roszman1_x64.so')
+@pytest.mark.parametrize("path", ['./Roszman1_x64.so', './msl-nlf/tests/user_defined/Roszman1_x64.so'])
+def test_roszman1(path):
+    lib = CDLL(path)
 
     buffer = create_string_buffer(256)
     lib.GetFunctionName(buffer)
