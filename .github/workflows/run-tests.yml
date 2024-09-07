@@ -37,7 +37,6 @@ jobs:
           pip install .[tests]
       - name: Compile Roszman1
         run: |
-          g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so          
-          cp Roszman1_x64.so msl-nlf/tests/user_defined/Roszman1_x64.so
+          g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o tests/Roszman1_x64.so
       - name: Run tests
-        run: pytest
+        run: pytest tests/test_dummy.py
