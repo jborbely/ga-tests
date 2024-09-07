@@ -42,4 +42,4 @@ jobs:
         run: |
           pytest tests -v
           cd msl-nlf
-          pytest /tests/test_nist.py::test_Roszman1
+          pytest tests/test_nist.py::test_Roszman1
