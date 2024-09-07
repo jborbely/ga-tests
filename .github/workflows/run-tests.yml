@@ -42,4 +42,5 @@ jobs:
         run: |
           ls -la
           python -m pytest tests -v
-          python -m pytest msl-nlf/tests/test_nist.py::test_Roszman1
+          cd msl-nlf/tests
+          python -m pytest test_nist.py::test_Roszman1
