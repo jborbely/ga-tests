@@ -37,8 +37,8 @@ jobs:
           pip install .[tests]
       - name: Compile Roszman1
         run: |
-          g++ -shared -Bstatic docs/assets/Roszman1.cpp -o Roszman1_x64.so          
-          cp Roszman1_x64.so tests/user_defined/Roszman1_x64.so
+          g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so          
+          cp Roszman1_x64.so msl-nlf/tests/user_defined/Roszman1_x64.so
       - name: Run tests
         run: |
           cd msl-nlf
