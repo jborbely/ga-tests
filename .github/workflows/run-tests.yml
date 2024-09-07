@@ -35,11 +35,10 @@ jobs:
         run: |
           cd msl-nlf
           pip install .[tests]
-          cd docs/assets
-          g++ -shared -Bstatic Roszman1.cpp -o Roszman1_x64.so          
-          cp Roszman1_x64.so ../../tests/user_defined/Roszman1_x64.so
-          cp Roszman1_x64.so ../../tests/user_defined/multiple/Roszman1_x64.so
-          cp Roszman1_x64.so ../../tests/user_defined/multiple/Roszman1_x64_copy.so
+      - name: Compile Roszman1
+        run: |
+          g++ -shared -Bstatic docs/assets/Roszman1.cpp -o Roszman1_x64.so          
+          cp Roszman1_x64.so tests/user_defined/Roszman1_x64.so
       - name: Run tests
         run: |
           cd msl-nlf
