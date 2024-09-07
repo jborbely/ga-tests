@@ -2,7 +2,7 @@ from ctypes import *
 
 def test_roszman1():
 
-    lib = CDLL('Roszman1_x64.so')
+    lib = CDLL('./Roszman1_x64.so')
 
     buffer = create_string_buffer(256)
     lib.GetFunctionName(buffer)
