@@ -31,6 +31,7 @@ jobs:
         run: |
           ldd msl-nlf/tests/user_defined/Nelson_x64.so
           ldd msl-nlf/tests/user_defined/Roszman1_x64.so
+          ldd msl-nlf/src/msl/nlf/bin/nlf-linux-x86_64.so
       - name: Install package
         run: |
           cd msl-nlf
