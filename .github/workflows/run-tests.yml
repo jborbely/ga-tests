@@ -15,8 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13.0-rc.1"]
-        os: [macos-13, macos-14, windows-latest, ubuntu-latest]
+        python-version: ["3.12"]
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout repository
@@ -25,5 +25,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Print platform
-        run: python -c "import platform; print(platform.system(), platform.machine(), platform.architecture())"
+      - name: Clone
+        run: git clone https://github.com/MSLNZ/msl-nlf.git
+      - name: ldd
+        run: |
+          ldd msl-nlf/tests/user_defined/Nelson_x64.so
+          ldd msl-nlf/tests/user_defined/Roszman1_x64.so
