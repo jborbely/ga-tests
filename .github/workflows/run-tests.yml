@@ -8,44 +8,33 @@ env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
 
 jobs:
-  test:
-    name: Test
-    runs-on: ${{ matrix.os }}
 
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.12"]
-        os: [ubuntu-latest]
-
+  macos-x86_64:
+    runs-on: macos-13
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+      - name: Build
+        run: |
+          git clone https://github.com/MSLNZ/msl-nlf.git
+          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Nelson.cpp -o Nelson_x64.dylib
+          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.dylib
+          cp Roszman1_x64.dylib Roszman1_x64_copy.dylib
+      - name: Upload libraries
+        uses: actions/upload-artifact@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          name: macos-x86_64
+          path: "*.dylib"
+
+  macos-arm64:
+    runs-on: macos-14
+    steps:
       - name: Clone
-        run: git clone https://github.com/MSLNZ/msl-nlf.git
-      - name: ldd
         run: |
-          ldd msl-nlf/tests/user_defined/Nelson_x64.so
-          echo
-          ldd msl-nlf/tests/user_defined/Roszman1_x64.so
-          echo
-          ldd msl-nlf/src/msl/nlf/bin/nlf-linux-x86_64.so
-      - name: Install package
-        run: |
-          cd msl-nlf
-          pip install .[tests]
-          sudo apt-get install fpc
-      - name: Compile Roszman1
-        run: |
-          g++ -shared -Bstatic msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.so
-      - name: Run tests
-        run: |
-          pytest tests -v
-          rm msl-nlf/tests/user_defined/Roszman1_x64.so
-          cp Roszman1_x64.so msl-nlf/tests/user_defined/Roszman1_x64.so
-          cd msl-nlf
-          pytest tests/test_nist.py::test_Roszman1
+          git clone https://github.com/MSLNZ/msl-nlf.git
+          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Nelson.cpp -o Nelson_arm64.dylib
+          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_arm64.dylib
+          cp Roszman1_arm64.dylib Roszman1_arm64_copy.dylib
+      - name: Upload libraries
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-arm64
+          path: "*.dylib"
