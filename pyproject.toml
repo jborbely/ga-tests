@@ -89,10 +89,8 @@ exclude = [
     ".git",
     ".github",
     ".venv",
-    "build",
-    "dist",
-    "venv",
-    "src/msl/loadlib/_version.py"
+    "tests",
+    "run_test.py",
 ]
 namespace-packages = ["src/msl"]
 target-version = "py38"
