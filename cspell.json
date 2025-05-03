@@ -20,13 +20,13 @@
         "cspell.json",
         "fortran_lib.f90",
         "meta.yaml",
-        "pyproject.toml"
+        "pyproject.toml",
+        "activex.py"
     ],
     "words": [
         "loadlib",
         "labview",
         "roszman",
-        "arctan",
-        "activex"
+        "arctan"
     ]
 }
