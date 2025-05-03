@@ -26,6 +26,7 @@
         "loadlib",
         "labview",
         "roszman",
-        "arctan"
+        "arctan",
+        "activex"
     ]
 }
