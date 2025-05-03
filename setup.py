@@ -1,3 +1,4 @@
+"""Legacy build script."""
 from setuptools import setup
 
 install_requires = []
