@@ -1,6 +1,6 @@
 """Legacy build script."""
 
-from setuptools import setup
+from setuptools import setup  # pyright: ignore[reportMissingModuleSource]
 
 install_requires = []
 
