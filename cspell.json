@@ -19,7 +19,7 @@
     "ignorePaths": [
         "cspell.json",
         "fortran_lib.f90",
-        "meta.yml"
+        "meta.yaml"
     ],
     "words": [
         "loadlib",
