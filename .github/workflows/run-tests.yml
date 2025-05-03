@@ -30,6 +30,6 @@ jobs:
       - name: Formatting
         run: uv run -- ruff format --force-exclude --check .
       - name: Typing:BasedPyright
-        run: uv run --with comtypes -- basedpyright .
+        run: uv run -- basedpyright .
       - name: Typing:MyPy
         run: uv run -- mypy .
