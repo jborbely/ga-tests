@@ -1,11 +1,11 @@
 import math
 
-from ctypes import *
+from ctypes import create_string_buffer, CDLL, c_int, byref, c_double
 
 import pytest
 
 @pytest.mark.parametrize("path", ['./Roszman1_x64.so', './msl-nlf/tests/user_defined/Roszman1_x64.so'])
-def test_roszman1(path):
+def test_roszman1(path: str) -> None:
     lib = CDLL(path)
 
     buffer = create_string_buffer(256)

@@ -6,7 +6,7 @@ install_requires = []
 
 tests_require = ["pytest", "pytest-cov"]
 
-setup(
+_ = setup(
     name="ga_tests",
     version="0.0.1",
     description="Test GitHub Actions",
