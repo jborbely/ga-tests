@@ -6,13 +6,14 @@ env:
   PY_COLORS: 1
   COLUMNS: 110
   PIP_DISABLE_PIP_VERSION_CHECK: 1
-  MYPYPATH: src
 
 jobs:
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    env:
+      MYPYPATH: src
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,4 +32,6 @@ jobs:
       - name: Typing:BasedPyright
         run: uv run -- basedpyright .
       - name: Typing:MyPy
-        run: uv run -- mypy .
+        run: |
+          - echo $MYPYPATH
+          - uv run -- mypy .
