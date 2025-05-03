@@ -6,35 +6,29 @@ env:
   PY_COLORS: 1
   COLUMNS: 110
   PIP_DISABLE_PIP_VERSION_CHECK: 1
+  MYPYPATH: src
 
 jobs:
 
-  macos-x86_64:
-    runs-on: macos-13
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
     steps:
-      - name: Build
-        run: |
-          git clone https://github.com/MSLNZ/msl-nlf.git
-          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Nelson.cpp -o Nelson_x64.dylib
-          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_x64.dylib
-          cp Roszman1_x64.dylib Roszman1_x64_copy.dylib
-      - name: Upload libraries
-        uses: actions/upload-artifact@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          name: macos-x86_64
-          path: "*.dylib"
-
-  macos-arm64:
-    runs-on: macos-14
-    steps:
-      - name: Clone
-        run: |
-          git clone https://github.com/MSLNZ/msl-nlf.git
-          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Nelson.cpp -o Nelson_arm64.dylib
-          g++ -shared -Bstatic -fPIC msl-nlf/docs/assets/Roszman1.cpp -o Roszman1_arm64.dylib
-          cp Roszman1_arm64.dylib Roszman1_arm64_copy.dylib
-      - name: Upload libraries
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-arm64
-          path: "*.dylib"
+          enable-cache: false
+      - name: Install cSpell
+        run: npm install -g cspell@latest
+      - name: Spelling
+        run: cspell .
+      - name: Linting
+        run: uv run -- ruff check --force-exclude --no-fix .
+      - name: Formatting
+        run: uv run -- ruff format --force-exclude --check .
+      - name: Typing:BasedPyright
+        run: uv run -- basedpyright .
+      - name: Typing:MyPy
+        run: uv run -- mypy .
