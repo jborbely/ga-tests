@@ -1,8 +1,10 @@
 """Legacy build script."""
 
-from setuptools import setup  # pyright: ignore[reportMissingModuleSource]
+from __future__ import annotations
 
-install_requires = []
+from setuptools import setup  # type: ignore[import-untyped] # pyright: ignore[reportMissingModuleSource]
+
+install_requires: list[str] = []
 
 tests_require = ["pytest", "pytest-cov"]
 
