@@ -32,6 +32,4 @@ jobs:
       - name: Typing:BasedPyright
         run: uv run -- basedpyright .
       - name: Typing:MyPy
-        run: |
-          - echo $MYPYPATH
-          - uv run -- mypy .
+        run: uv run -- mypy .
