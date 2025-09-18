@@ -21,5 +21,8 @@ def test() -> None:
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_LOOP, 1)
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255)
     sock.bind((addresses.pop(), 0))
-    _ = sock.sendto(b"hi", (MDNS_ADDR, MDNS_PORT))
+    try:
+        _ = sock.sendto(b"hi", (MDNS_ADDR, MDNS_PORT))
+    except OSError:
+        pass
     sock.close()
