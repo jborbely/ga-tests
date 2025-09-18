@@ -1,28 +1,8 @@
-import math
+import subprocess
 
-from ctypes import create_string_buffer, CDLL, c_int, byref, c_double
-
-import pytest
-
-@pytest.mark.parametrize("path", ['./Roszman1_x64.so', './msl-nlf/tests/user_defined/Roszman1_x64.so'])
-def test_roszman1(path: str) -> None:
-    lib = CDLL(path)
-
-    buffer = create_string_buffer(256)
-    lib.GetFunctionName(buffer)
-    assert buffer.value.decode() == "f1: Roszman1 f1=a1-a2*x-arctan(a3/(x-a4))/pi"
-
-    num = c_int()
-    lib.GetNumParameters(byref(num))
-    assert num.value == 4
-
-    lib.GetNumVariables(byref(num))
-    assert num.value == 1
-
-    x = -4868.68
-    a1, a2, a3, a4 = (0.2, -6e-6, 1.2e3, -1.8e2)
-    x_c = c_double(x)
-    a = (c_double * 4)(a1, a2, a3, a4)
-    y = c_double()
-    lib.GetFunctionValue(byref(x_c), byref(a), byref(y))
-    assert y.value == a1-a2*x-math.atan(a3/(x-a4))/math.pi
+def test() -> None:
+    ps = subprocess.Popen("ifconfig", stdout=subprocess.PIPE)  # noqa: S607
+    output = subprocess.check_output(("grep", "inet "), stdin=ps.stdout)
+    _ = ps.wait()
+    addresses = {line.split()[1] for line in output.decode().splitlines()}
+    assert addresses == {"127.0.0.1"}
