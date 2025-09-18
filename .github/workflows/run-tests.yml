@@ -1,15 +1,13 @@
 name: Tests
 
-on: [push, pull_request]
+on: [push]
 
 env:
   PY_COLORS: 1
   COLUMNS: 110
-  PIP_DISABLE_PIP_VERSION_CHECK: 1
 
 jobs:
-
-  lint:
+  test:
     name: Test
     runs-on: ${{ matrix.os }}
     strategy:
@@ -24,4 +22,4 @@ jobs:
         with:
           enable-cache: false
       - name: Run tests with ${{ matrix.python-version }}
-        run: uv run --with pytest --python ${{ matrix.python-version }} -- pytest
+        run: uv run --python ${{ matrix.python-version }} -- pytest
