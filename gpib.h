@@ -2,7 +2,7 @@
 // Mocks a GPIB library for testing purposes.
 //
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     #define EXPORT __declspec(dllexport)
 #else
     #define EXPORT __attribute__((visibility("default")))

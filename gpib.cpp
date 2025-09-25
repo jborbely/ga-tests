@@ -53,7 +53,7 @@ int ibwait( int ud, int mask ) { return 32; }
 int ibwrt( int ud, const void *buf, long count ) { return 33; }
 int ibwrta( int ud, const void *buf, long count ) { return 34; }
 
-#if defined(_WIN32) || defined(_WIN64)
+#ifdef _WIN32
     int ibfindW(const wchar_t *dev) {
         if (wcscmp(dev, L"bad") == 0) return -1;
         return 2;
