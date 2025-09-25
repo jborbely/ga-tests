@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-2022, windows-latest]
+        os: [macos-latest, ubuntu-22.04, windows-latest]
         # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - name: Checkout repository
@@ -26,13 +26,13 @@ jobs:
       #   run: uv run --python ${{ matrix.python-version }} -- pytest
       - name: Build linux
         if: ${{ matrix.os == 'ubuntu-22.04' }}
-        run: g++ gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.so
+        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.so
       - name: Build macos
         if: ${{ matrix.os == 'macos-latest' }}
-        run: g++ gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dylib
-      - name: Build macos
+        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dylib
+      - name: Build windows
         if: ${{ matrix.os == 'windows-latest' }}
-        run: g++ gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dll
+        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dll
       - uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
