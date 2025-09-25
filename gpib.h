@@ -2,14 +2,10 @@
 // Mocks a GPIB library for testing purposes.
 //
 
-#if defined(_MSC_VER)
-    // Microsoft
+#if defined(_WIN64)
     #define EXPORT __declspec(dllexport)
-#elif defined(__GNUC__)
-    // G++
-    #define EXPORT __attribute__((visibility("default")))
 #else
-#   error "Unknown EXPORT semantics"
+    #define EXPORT __attribute__((visibility("default")))
 #endif
 
 int EARG = 4;
