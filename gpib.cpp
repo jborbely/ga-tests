@@ -53,15 +53,16 @@ int ibwait( int ud, int mask ) { return 32; }
 int ibwrt( int ud, const void *buf, long count ) { return 33; }
 int ibwrta( int ud, const void *buf, long count ) { return 34; }
 
-#ifdef _WIN32
-    int ibfindW(const wchar_t *dev) {
-        if (wcscmp(dev, L"bad") == 0) return -1;
-        return 2;
-    }
-#else
+#ifdef __unix__
     int ibfind( const char *dev ) {
         if (strcmp(dev, "bad") == 0) return -1;
         return 2;
     }
     void ibvers( char **version) { *version = (char*)"1.2"; }
+
+#else
+    int ibfindW(const wchar_t *dev) {
+        if (wcscmp(dev, L"bad") == 0) return -1;
+        return 2;
+    }
 #endif

@@ -2,10 +2,10 @@
 // Mocks a GPIB library for testing purposes.
 //
 
-#ifdef _WIN32
-    #define EXPORT __declspec(dllexport)
-#else
+#ifdef __unix__
     #define EXPORT __attribute__((visibility("default")))
+#else
+    #define EXPORT __declspec(dllexport)
 #endif
 
 int EARG = 4;
