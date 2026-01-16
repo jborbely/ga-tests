@@ -26,13 +26,13 @@ jobs:
       #   run: uv run --python ${{ matrix.python-version }} -- pytest
       - name: Build linux
         if: ${{ matrix.os == 'ubuntu-22.04' }}
-        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.so
+        run: gcc d2xx.cpp -fPIC -shared -Bstatic -Wall -o d2xx.so
       - name: Build macos
         if: ${{ matrix.os == 'macos-latest' }}
-        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dylib
+        run: gcc d2xx.cpp -fPIC -shared -Bstatic -Wall -o d2xx.dylib
       - name: Build windows
         if: ${{ matrix.os == 'windows-latest' }}
-        run: gcc gpib.cpp -fPIC -shared -Bstatic -Wall -o gpib.dll
+        run: gcc d2xx.cpp -fPIC -shared -Bstatic -Wall -o d2xx.dll
       - uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
@@ -41,4 +41,4 @@ jobs:
 
           # A file, directory or wildcard pattern that describes what to upload
           # Required.
-          path: gpib.*
+          path: d2xx.*
