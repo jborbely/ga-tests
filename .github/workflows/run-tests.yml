@@ -26,7 +26,7 @@ jobs:
       # - name: Run tests with ${{ matrix.python-version }}
       #   run: uv run --python ${{ matrix.python-version }} -- pytest
       - name: Build linux
-        if: ${{ matrix.os == 'ubuntu-22.04' }}
+        if: ${{ matrix.os == 'ubuntu-24.04-arm' }}
         run: |
           python3 -c "import sysconfig; print(sysconfig.get_platform())"
           gcc cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.so
