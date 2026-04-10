@@ -28,9 +28,10 @@ jobs:
       - name: Build linux
         if: ${{ matrix.os == 'ubuntu-24.04-arm' }}
         run: |
-          sudo apt update && sudo apt install build-essential
+          sudo apt update && sudo apt install -y build-essential cmake
           python3 -c "import sysconfig; print(sysconfig.get_platform())"
-          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.so
+          g++ -c -fPIC -Bstatic -Wall cpp_lib.cpp -o mylib.o
+          g++ -shared -o cpp_libaarch64.so mylib.o
           gfortran -fno-underscoring -fPIC fortran_lib.f90 -static -shared -o fortran_libaarch64.so
       - uses: actions/upload-artifact@v4
         with:
