@@ -31,7 +31,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y libc++-dev libc++abi-dev
           python3 -c "import sysconfig; print(sysconfig.get_platform())"
           g++ cpp_lib.cpp -fPIC -shared -o cpp_libaarch64.so
-          gfortran -fno-underscoring -fPIC fortran_lib.f90 -static -shared -o fortran_libaarch64.so
+#          gfortran -fno-underscoring -fPIC fortran_lib.f90 -static -shared -o fortran_libaarch64.so
       - uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
