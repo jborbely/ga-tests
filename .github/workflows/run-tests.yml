@@ -1,6 +1,10 @@
-name: Tests
+name: Test Runner
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
 
 env:
   PY_COLORS: 1
@@ -13,31 +17,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os : [ubuntu-24.04-arm]
+        os : ["ubuntu-24.04"]
+        python-version: ["3.15"]
         # os: [macos-latest, ubuntu-22.04, windows-latest]
         # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
-      # - name: Install uv
-      #   uses: astral-sh/setup-uv@v6
-      #   with:
-      #     enable-cache: false
-      # - name: Run tests with ${{ matrix.python-version }}
-      #   run: uv run --python ${{ matrix.python-version }} -- pytest
-      - name: Build linux
-        if: ${{ matrix.os == 'ubuntu-24.04-arm' }}
-        run: |
-          sudo apt-get update && sudo apt-get install -y gfortran
-          python3 -c "import sysconfig; print(sysconfig.get_platform())"
-          g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.so
-          gfortran -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libaarch64.so
-      - uses: actions/upload-artifact@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
         with:
-          # Name of the artifact to upload.
-          # Optional. Default is 'artifact'
-          name: ${{ matrix.os }}
-
-          # A file, directory or wildcard pattern that describes what to upload
-          # Required.
-          path: "*.so"
+          enable-cache: false
+      - name: Run tests with ${{ matrix.python-version }}
+        run: uv run --python ${{ matrix.python-version }} -- pytest
+      - name: Check Trigger Source
+        run: |
+          echo "This workflow was triggered by: ${{ github.event_name }}"
+          echo "Triggered on branch/ref: ${{ github.ref_name }}"
+      # - name: Build linux
+      #   if: ${{ matrix.os == 'ubuntu-24.04' }}
+      #   run: |
+      #     sudo apt-get update && sudo apt-get install -y gfortran
+      #     python3 -c "import sysconfig; print(sysconfig.get_platform())"
+      #     g++ cpp_lib.cpp -fPIC -shared -Bstatic -Wall -o cpp_libaarch64.so
+      #     gfortran -fno-underscoring -fPIC fortran_lib.f90 -shared -o fortran_libaarch64.so
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     # Name of the artifact to upload.
+      #     # Optional. Default is 'artifact'
+      #     name: ${{ matrix.os }}
+      #     # A file, directory or wildcard pattern that describes what to upload
+      #     # Required.
+      #     path: "*.so"
